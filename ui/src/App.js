@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          Qinfo | 
+          Qinfo
           <SearchBar></SearchBar>
         </div>
         <div className="App-content">

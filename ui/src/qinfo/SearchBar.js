@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function () {
-    return <span>SearchBar here</span>
+    return <input placeholder="search here"></input>
 }
