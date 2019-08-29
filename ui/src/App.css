@@ -7,3 +7,10 @@
   color: white;
   padding-bottom: 5px;
 }
+
+.Qinfo-search {
+  color: aqua;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
