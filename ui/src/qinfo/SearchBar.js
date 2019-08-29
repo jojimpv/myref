@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 class SearchBar extends Component {
     render(){
         return(
-            <form className="Qinfo-search" action="qinfo/query">
+            <form className="Qinfo-search" action="api/qinfo/query">
                 <input type="text" name="txt" />
                 <input type="submit" value="Submit" />
             </form>

@@ -21,5 +21,5 @@ from qinfo.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('qinfo/', include('qinfo.urls'))
+    path('api/', include('app.urls_api'))
 ]
