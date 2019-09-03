@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
-import SearchBar from './qinfo/SearchBar'
+import Qinfo from './qinfo/Qinfo'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          Qinfo
-          <SearchBar></SearchBar>
+          <Qinfo></Qinfo>
         </div>
         <div className="App-content">
-          App content
+          {/* App content */}
         </div>
       </div>
     );
