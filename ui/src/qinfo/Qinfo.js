@@ -8,17 +8,17 @@ class FileMatchDetails extends Component {
 
     render() {
         const listItems = this.props.result.map((x) =>
-        <div>
-            <div className="Qinfo-items-head">
-                {x.filename}
+            <div className="Qinfo-items">
+                <div className="Qinfo-items-head">
+                    {x.filename}
+                </div>
+                {x.matches.map((y) =>
+                    <div className="Qinfo-items-content">
+                        <div className="Qinfo-items-lno">{y.lno}</div>
+                        <div className="Qinfo-items-txt"> {y.txt} </div>
+                    </div>
+                )}
             </div>
-            <div>
-                {x.matches.map((y) => <div className="Qinfo-items-txt">
-                    <span className="Qinfo-items-head">{y.lno}</span> {y.txt}
-                </div>)}
-            </div>
-        </div>
-            
         );
         return (
             <div>
@@ -54,7 +54,6 @@ class Qinfo extends Component {
     }
 
     render() {
-        // const listItems = this.state.searchResult.map((x) => <li>{x.filename}</li>);
         return (
         <div>
             <b>Qinfo</b>
@@ -66,7 +65,6 @@ class Qinfo extends Component {
             <FileMatchDetails 
                 result={this.state.searchResult}
             />
-            {/* {listItems.length > 0 ? <ol>{listItems}</ol> : null}  */}
         </div>
         )
     }
