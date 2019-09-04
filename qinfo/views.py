@@ -18,10 +18,15 @@ def query(request):
     result = []
     for f in flist:
         with open(f) as fdata:
-            if txt in fdata.read():
-                result.append(f)
-    data = dict(success=True,
+            lines = fdata.readlines()
+            filematch = dict(filename=f, matches=[])
+            for lno, line in enumerate(lines, start=1):
+                if txt in line:
+                    filematch['matches'].append(dict(lno=lno, txt=line))
+            if filematch['matches']:
+                result.append(filematch)
+    resp = dict(success=True,
                 message=None,
                 data=dict(result=result)
                 )
-    return JsonResponse(data)
+    return JsonResponse(resp)

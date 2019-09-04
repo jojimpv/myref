@@ -9,7 +9,7 @@ class SearchBar extends Component {
         return(
             <form className="Qinfo-search" onSubmit={this.props.onSubmit}>
                 <input type="text" name="txt" value={this.props.txt} onChange={this.props.onUpdate} />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Search" />
             </form>
         );
     }

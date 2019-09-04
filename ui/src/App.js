@@ -7,10 +7,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <Qinfo></Qinfo>
         </div>
         <div className="App-content">
-          {/* App content */}
+          <Qinfo></Qinfo>
         </div>
       </div>
     );

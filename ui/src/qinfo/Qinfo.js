@@ -1,6 +1,33 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar'
 
+class FileMatchDetails extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const listItems = this.props.result.map((x) =>
+        <div>
+            <div className="Qinfo-items-head">
+                {x.filename}
+            </div>
+            <div>
+                {x.matches.map((y) => <div className="Qinfo-items-txt">
+                    <span className="Qinfo-items-head">{y.lno}</span> {y.txt}
+                </div>)}
+            </div>
+        </div>
+            
+        );
+        return (
+            <div>
+                {listItems.length > 0 ? listItems : null}
+            </div>
+        )        
+    }
+}
+
 class Qinfo extends Component {
     constructor(props){
         super(props);
@@ -18,9 +45,7 @@ class Qinfo extends Component {
 
     handleSubmit(event){
         fetch("api/qinfo/query"+'?txt='+this.state.searchTxt).then((response) => {
-                console.log(response);
                 response.json().then((resp) => {
-                    console.log(this)
                     this.setState({searchResult: resp.data.result})
                 })
             }
@@ -29,17 +54,19 @@ class Qinfo extends Component {
     }
 
     render() {
-        const listItems = this.state.searchResult.map((x) => <li>{x}</li>);
+        // const listItems = this.state.searchResult.map((x) => <li>{x.filename}</li>);
         return (
         <div>
             <b>Qinfo</b>
             <SearchBar 
-                txt={this.state.searchTxt} 
-                result={this.state.searchResult}
+                txt={this.state.searchTxt}
                 onUpdate={this.handleChange}
                 onSubmit={this.handleSubmit}
-            ></SearchBar>
-            {listItems.length > 0 ? <ol>{listItems}</ol> : null} 
+            />
+            <FileMatchDetails 
+                result={this.state.searchResult}
+            />
+            {/* {listItems.length > 0 ? <ol>{listItems}</ol> : null}  */}
         </div>
         )
     }
