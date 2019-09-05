@@ -28,6 +28,8 @@
 
 .Qinfo-items-content {
   display: flex;
+  font-size: small;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .Qinfo-items-lno {
@@ -35,14 +37,13 @@
   background-color: #222;
   color: dimgray;
   padding-right: 5px;
+  padding-top: 5px;
   width: 30px;
 }
 
 .Qinfo-items-txt {
   background-color: white;
   color: black;
-  font-size: small;
-  font-family: 'Courier New', Courier, monospace;
   padding: 5px;
   flex: 1;
 }
