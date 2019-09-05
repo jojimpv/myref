@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .App-content {
@@ -24,11 +25,13 @@
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 35px;
+  font-style: italic;
+  font-size: small;
 }
 
 .Qinfo-items-content {
   display: flex;
-  font-size: small;
+  font-size: medium;
   font-family: 'Courier New', Courier, monospace;
 }
 
@@ -39,6 +42,7 @@
   padding-right: 5px;
   padding-top: 5px;
   width: 30px;
+  text-align: right;
 }
 
 .Qinfo-items-txt {
