@@ -1,73 +1,84 @@
-import React, { Component } from 'react';
-import SearchBar from './SearchBar'
+import React, { useState } from 'react';
 
-class FileMatchDetails extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        const listItems = this.props.result.map((x) =>
-            <div className="Qinfo-items">
-                <div className="Qinfo-items-head">
-                    {x.filename}
-                </div>
-                {x.matches.map((y) =>
-                    <div className="Qinfo-items-content">
-                        <div className="Qinfo-items-lno">{y.lno}</div>
-                        <div className="Qinfo-items-txt"> {y.txt} </div>
-                    </div>
-                )}
-            </div>
-        );
-        return (
-            <div>
-                {listItems.length > 0 ? listItems : null}
-            </div>
-        )        
-    }
+function SearchInput({txt, handleChange, handleSubmit}) {
+    return(
+        <form className="Qinfo-search" onSubmit={handleSubmit}>
+            <input className="Qinfo-input"
+                type="text" 
+                placeholder="search here..." 
+                value={txt} 
+                name="txt" 
+                onChange={handleChange} 
+            />
+            <input type="submit" value="Search" />
+        </form>
+    );
 }
 
-class Qinfo extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            searchTxt:'',
-            searchResult: []
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+function SearchResultDetails({item}) {
+    return (
+        <div className="Qinfo-items-content">
+            <div className="Qinfo-items-lno">{item.lno}</div>
+            <div className="Qinfo-items-txt"> {item.txt} </div>
+        </div>
+    )
+}
+
+function SearchResult({result}) {
+    const resultItems = result.map((resultItem) =>
+        <div className="Qinfo-items">
+            <div className="Qinfo-items-head">
+                {resultItem.filename}
+            </div>
+            <div>
+                {resultItem.matches.map((resultItemMatch) => 
+                    <SearchResultDetails item={resultItemMatch} />
+                )}
+            </div>
+        </div>
+    );
+    return (
+        <div>
+            {resultItems.length > 0 ? resultItems : null}
+        </div>
+    )
+}
+
+function Qinfo(){
+    const [state, setState] = useState({
+        txt:'', 
+        result:[]
+    });
+
+    const handleChange = (event) => {
+        setState({...state, txt: event.target.value})
     }
 
-    handleChange(event){
-        this.setState({searchTxt: event.target.value})
-    }
-
-    handleSubmit(event){
-        fetch("api/qinfo/query"+'?txt='+this.state.searchTxt).then((response) => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        fetch("api/qinfo/query"+'?txt='+state.txt).then((response) => {
                 response.json().then((resp) => {
-                    this.setState({searchResult: resp.data.result})
+                    setState({...state, result: resp.data.result})
                 })
             }
         );
-        event.preventDefault();
     }
 
-    render() {
-        return (
+    return (
         <div>
-            <b>Qinfo</b>
-            <SearchBar 
-                txt={this.state.searchTxt}
-                onUpdate={this.handleChange}
-                onSubmit={this.handleSubmit}
+            <div className="Qinfo-title">
+                <b>Qinfo</b>
+            </div>
+            <SearchInput 
+                txt={state.txt}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
             />
-            <FileMatchDetails 
-                result={this.state.searchResult}
+            <SearchResult 
+                result={state.result}
             />
         </div>
-        )
-    }
+    )
 }
 
 export default Qinfo;
